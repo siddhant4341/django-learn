@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Show Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+        input[type="submit"] {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">User Data</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Firstname</th>
+                    <th scope="col">Lastname</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Contact</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            {% if key1 %}
+            <tbody>
+                {% for i in key1 %}
+                <tr>
+                    <th scope="row">{{ i.id }}</th>
+                    <td>{{ i.Firstname }}</td>
+                    <td>{{ i.Lastname }}</td>
+                    <td>{{ i.Email }}</td>
+                    <td>{{ i.Contact }}</td>
+                    <td>
+                        <form name="EditForm" action="{% url 'editpage' pk=i.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="EDIT">
+                        </form>
+                    </td>
+                    <td>
+                        <form name="DeleteForm" action="{% url 'delete' pk=i.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="DELETE">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            {% else %}
+            <tbody>
+                <tr>
+                    <td colspan="7" class="text-center">No data available</td>
+                </tr>
+            </tbody>
+            {% endif %}
+        </table>
+    </div>
+</body>
+</html>
