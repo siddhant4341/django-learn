@@ -3,6 +3,14 @@ from . import views
 
 urlpatterns = [
 
+    
+    path("loginpage/",views.LoginPage ,name = "loginpage"),
+    path("loginuser/",views.LoginUser ,name = "login"),
+    
+    #image uploading
+    path("indexpage/",views.IndexPage ,name = "index"),
+    path("upload/",views.UploadImage ,name = "imageupload"),
+
     #CRUD
     path("",views.InsertPageView ,name = "insertpage"),
     path("insert/",views.InsertData ,name = "insert"),
